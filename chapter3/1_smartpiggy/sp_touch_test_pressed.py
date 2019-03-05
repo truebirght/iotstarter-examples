@@ -7,11 +7,11 @@ GPIO.setup(SIG_PIN, GPIO.IN)
 
  try:
 	 while(True):
-		 pressed =  GPIO.input(SIG_PIN)
-		 if pressed:
-			 print ("pressed")
-			 time.sleep(0.1)
+		pressed =  GPIO.input(SIG_PIN)
+		if pressed:
+			print ("pressed")
+			time.sleep(0.1)
  except KeyboardInterrupt:
-	 print("Finished")
+	print("Finished")
  finally:
-	 GPIO.cleanup()
+	GPIO.cleanup()
