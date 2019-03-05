@@ -19,7 +19,7 @@ def turnOff():
 
 def turnOn(color):
 	if not isinstance(color, Colors):
-		raise TypeError('반드시 Colors 매개변수를 사용하여야 합니다.');
+		raise TypeError('You must use Colors types.');
 	
 	turnOff();
 	if color == Colors.WHITE:
