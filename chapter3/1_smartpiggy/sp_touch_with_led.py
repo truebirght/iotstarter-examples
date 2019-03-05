@@ -7,9 +7,9 @@ GPIO.setmode(GPIO.BCM)
 SIG_PIN = 24
 GPIO.setup(SIG_PIN, GPIO.IN)
 
- beforePressed = False
+beforePressed = False
  
- try:
+try:
 	color_list = [Colors.BLUE, Colors.GREEN, Colors.RED, Colors.WHITE]
 	cnt = 0
 	 
@@ -24,7 +24,7 @@ GPIO.setup(SIG_PIN, GPIO.IN)
 		beforePressed = pressed
 		time.sleep(0.1)
 				 
- except KeyboardInterrupt:
+except KeyboardInterrupt:
 	 print("Finished")
- finally:
+finally:
 	 GPIO.cleanup()

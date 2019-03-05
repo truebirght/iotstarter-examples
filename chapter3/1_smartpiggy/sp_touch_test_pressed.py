@@ -11,7 +11,7 @@ try:
 		if pressed:
 			print ("pressed")
 			time.sleep(0.1)
- except KeyboardInterrupt:
+except KeyboardInterrupt:
 	print("Finished")
- finally:
+finally:
 	GPIO.cleanup()
