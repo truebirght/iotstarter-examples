@@ -1,6 +1,6 @@
 import time
 import RPi.GPIO as GPIO
-from modules import af_servo_speaker as servo
+import af_servo_speaker as servo
 
 GPIO.setmode(GPIO.BCM)
 

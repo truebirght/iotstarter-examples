@@ -1,4 +1,4 @@
-from modules import af_servo as servo
+import af_servo as servo
 import RPi.GPIO as GPIO
 
 try:
