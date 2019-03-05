@@ -5,8 +5,8 @@ GPIO.setmode(GPIO.BCM)
 SIG_PIN = 24
 GPIO.setup(SIG_PIN, GPIO.IN)
 
- try:
-	 while(True):
+try:
+	while(True):
 		pressed =  GPIO.input(SIG_PIN)
 		if pressed:
 			print ("pressed")
