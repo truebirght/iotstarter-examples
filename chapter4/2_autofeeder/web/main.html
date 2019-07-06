@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    자동급식기 제어페이지
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="./assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
+</head>
+
+<body class="profile-page">
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('./assets/img/bg.jpg');">
+  </div>
+  <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile">
+              <div class="avatar">
+                <img src="./assets/img/user.jpg" alt="Circle Image"
+                  class="img-raised rounded-circle img-fluid">
+              </div>
+              <div class="name">
+                <h3>Jin Hyun님 환영합니다!</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <div class="profile-tabs">
+              <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#list" role="tab" data-toggle="tab">
+                    <i class="material-icons">list</i> 급식기록
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#settings" role="tab" data-toggle="tab">
+                    <i class="material-icons">settings</i> 자동급식 설정
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--탭 컨텐츠 시작-->
+        <div class="tab-content tab-space">
+          <!--급식기록-->
+          <div class="tab-pane active" id="list">
+            <div class="row justify-content-end">
+              <div class="float-right sticky-top">
+                <button class="btn btn-info btn-round">
+                  <i class="material-icons">favorite</i>&nbsp;즉시급식
+                </button>
+              </div>
+              <div class="col-md-12 ml-auto">
+                <h3 class="text-left text-muted">급식기록(최근 10건)</h3>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <i class="material-icons align-middle text-success">info</i>2019-07-07 11:30
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane" id="settings">
+            <!--자동급식 설정-->
+            <div class="row justify-content-start">
+              <h3 class="text-left col-12 text-muted">자동급식 추가</h3>
+              <div class="form-group col-6">
+                <div class='input-group date' id='feeding-timepicker'>
+                  <input type='text' class="form-control" />
+                  <span class="input-group-addon">
+                    <i class="material-icons">date_range</i>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-success button-icon" style="margin-top: 22px;">
+                  <i class="material-icons">alarm_add</i>
+                  추가
+                </button>
+              </div>
+            </div>
+            <!--급식설정 목록-->
+            <div class="row justify-content-end">
+              <h3 class="text-left col-12 text-muted">자동급식 목록</h3>
+              <div class="list-group col-12">
+                <div class="list-group-item">
+                  오전 08:30
+                  <span class="ml-3">
+                    <span class="btn btn-danger">
+                      <i class="material-icons">alarm_off</i> 삭제
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <footer class="footer footer-default">
+    <div class="container">
+      <nav class="float-left">
+        &nbsp;
+      </nav>
+      <div class="copyright float-right">
+        &nbsp;
+      </div>
+    </div>
+  </footer>
+  <!--   Core JS Files   -->
+  <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="./assets/js/plugins/moment.min.js"></script>
+  <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+  <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+  <script src="./assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function () {
+      $('#feeding-timepicker').datetimepicker({
+        format: 'LT',
+        locale: 'ko',
+        icons: {
+          time: "fa fa-clock-o",
+          date: "fa fa-calendar",
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down",
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-screenshot',
+          clear: 'fa fa-trash',
+          close: 'fa fa-remove'
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
