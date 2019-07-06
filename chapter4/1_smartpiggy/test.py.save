@@ -1,0 +1,10 @@
+import time
+import RPi.GPIO as GPIO
+import sp_rgbled as led
+from sp_rgbled import Colors 
+
+
+GPIO.setmode(GPIO.BCM)
+
+
+
