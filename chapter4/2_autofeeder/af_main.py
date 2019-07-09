@@ -15,8 +15,7 @@ def add_action(type):
     db.reference('/queue').push({
         "startAt": round(datetime.datetime.now().timestamp()),
         "status": "pending",
-        "type": type,
-        "action": "feed"
+        "type": type
     })
 
 
@@ -106,11 +105,16 @@ if __name__ == '__main__':
     except FileNotFoundError:
         print('인증정보 파일 위치가 올바르지 않습니다.')
     except KeyboardInterrupt:
-        print('사용자가 프로그램을 종료하였습니다.')  
+        print('사용자가 프로그램을 종료하였습니다.. 잠시만 기다려주십시오.')  
+    except firebase_admin.db.ApiCallError:
+        print('databaseURL이 올바르지 않습니다.')
     finally:
         schedule.clear()
-        ql.close()
-        bl.close()
+        if ql != None:
+            ql.close()
+        if bl != None:
+            bl.close()
         firebase_admin.delete_app(firebase_admin.get_app())
         sys.exit(0)
+        
     
