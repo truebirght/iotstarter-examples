@@ -1,14 +1,13 @@
+import RPi.GPIO as GPIO
 import firebase_admin
 import schedule
-import time
 import datetime
-import random
-import sys
-from time import sleep
-from random import randint
+import pygame
+import time
 
 from firebase_admin import credentials
 from firebase_admin import db
+
 
 # 자동급식/수동급식 실행시 Firebase로 정보 전송
 def add_action(type):
@@ -32,7 +31,6 @@ def on_batch_modified(evt):
         if evt.data != None:
             set_schedule_job(evt.data)
         else:
-            
             schedule.clear(evt.path[1:])    
 
 # 급식정보가 추가됬을때 수행
@@ -42,13 +40,19 @@ def on_action_added(evt):
 
     data = evt.data
     try:
-        #TODO :: 실제 서보모터를 돌려야함
-        delay = randint(1, 5)
-        print('[sleep {0}sec] - {1}'.format(delay, data))
-        sleep(delay)
-        
-        if bool(random.choice([True, False])):
-            raise IOError('운명은 신에게 맡기세요..')
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            pass
+        pwm = GPIO.PWM(17, 50)
+        pwm.start(2.5)
+        time.sleep(1)
+
+        pwm.ChangeDutyCycle(12.5)
+        time.sleep(0.5)
+
+        pwm.ChangeDutyCycle(2.5)
+        time.sleep(1)
+        pwm.stop()
 
         data['status'] = 'complete'
     except Exception as ex:
@@ -62,7 +66,6 @@ def set_schedule_job(job):
     time_str = str(job['hour']) + ':' + str(job['minute'])
     if job['everyday'] == True:
         schedule.every().day.at(time_str).do(add_action, type='batch').tag(job['key'])
-        print("batch_job_added : everyday " + time_str)
     else:
         for k in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']:
             if job[k] == True:
@@ -82,15 +85,28 @@ def set_schedule_job(job):
                 if k == 'sun':
                     schedule.every().sunday.at(time_str).do(add_action, type='batch').tag(job['key'])
 
-
 if __name__ == '__main__':
     ql = None
     bl = None
 
     try:
+        GPIO.setmode(GPIO.BCM)
+        
+        #핀모드 설정
+        GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(17, GPIO.OUT)
+        
+        #음성출력 설정
+        pygame.mixer.init()
+        pygame.mixer.music.load("bell.mp3")
+        pygame.mixer.music.set_volume(1.0)
+        
+        #수동으로 버튼이 눌렸을때 동작
+        GPIO.add_event_detect(20, GPIO.FALLING, lambda x: add_action('local'), 3000)
+        
         # Firebase 인증정보 연결 및 초기화
         cred = credentials.Certificate(
-            'C:\\Users\\GgamMang\\Downloads\\fb-adminsdk.json')
+            '/home/pi/fb-adminsdk.json')
         firebase_admin.initialize_app(cred, {
             'databaseURL': 'https://iotstarter-smartfeeder.firebaseio.com'
         })
@@ -110,11 +126,13 @@ if __name__ == '__main__':
         print('databaseURL이 올바르지 않습니다.')
     finally:
         schedule.clear()
+        GPIO.cleanup()
         if ql != None:
             ql.close()
         if bl != None:
             bl.close()
-        firebase_admin.delete_app(firebase_admin.get_app())
-        sys.exit(0)
+        if firebase_admin.get_app() != None:
+            firebase_admin.delete_app(firebase_admin.get_app())
+        
         
     
