@@ -149,6 +149,7 @@ def stop():
 
 if __name__ == "__main__":
 	init()
+	print("hello")
 	t1 = threading.Thread(target=get_light_val)
 	t2 = threading.Thread(target=get_back_dist)
 	t3 = threading.Thread(target=get_bt_chars)

@@ -27,13 +27,13 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6">
                 <div class="d-flex justify-content-center align-items-center" style="width:324px;height:244px;">
                     <iframe src="http://192.168.10.26:8080/stream/video.mjpeg"></iframe>
                 </div>
             </div>
-            <div class="col-6">
-                <div  class="perv">1234</div>
+            <div class="col-sm-12 col-md-6">
+                <div  class="perv text-center">ready!</div>
                 <div class="d-flex justify-content-center" style="width: 210px; height: 210px;">
                     <div id="joystick"></div>
                 </div>
@@ -70,6 +70,7 @@
         
         var prevAngle = null;
         manager.on('end', function (evt, data) {
+			$(".perv").text("stop")
             $.post("move",{"angle" : "stop"});
         }).on('move', function (evt, data) {
             if(data == undefined || data.direction == undefined) return;
