@@ -57,7 +57,7 @@
 
     <script type="text/javascript">
         $(function(){
-            var src = window.location.hostname + ":8080/stream/video.mjpeg";
+            var src = "http://" +  window.location.hostname + ":8080/stream/video.mjpeg";
             $("iframe").attr("src", src);
         })
 
